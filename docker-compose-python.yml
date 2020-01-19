@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  python3dev:
+    hostname: python3dev
+    build:
+      context: ./cont_python3dev
+      dockerfile: Dockerfile
+    networks:
+      - lan_dev
+    volumes:
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.pgpass:/root/.pgpass
+      - python3dev_vol:/workspace
+      - $SSH_AUTH_SOCK:/ssh-agent
+      - /etc/hosts:/etc/hosts
+      - ./var_python3dev/vscode-server_vol:/root/.vscode-server
+      - cgroup_python3dev:/sys/fs/cgroup
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    privileged: true
+    command: /bin/bash -c "while sleep 1000; do :; done"
+
+    networks:
+      - lan_dev
+
+networks:
+  lan_dev:
+
+volumes:
+  python3dev_vol:
+  cgroup_python3dev:

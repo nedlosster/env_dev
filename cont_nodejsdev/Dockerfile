@@ -17,7 +17,7 @@ RUN yum install -y make gcc gcc-c++ zeromq zeromq-devel
 RUN curl -sL https://rpm.nodesource.com/setup_12.x | bash -
 
 RUN yum install -y nodejs node-gyp; yum clean all
-RUN npm install pm2@2.5 -g
+RUN npm install pm2@2.5 eslint -g
 
 # Copy config
 #COPY /conf/core.config.php /etc/well.d/
