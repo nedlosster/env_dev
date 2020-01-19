@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+
+  cppdev:
+    hostname: cppdev
+    environment:
+      TERM: xterm
+    build:
+      context: ./cont_cppdev
+      dockerfile: Dockerfile
+    networks:
+      - lan_dev
+    volumes:
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.pgpass:/root/.pgpass
+      - cppdev_vol:/workspace
+      - $SSH_AUTH_SOCK:/ssh-agent
+      - /etc/hosts:/etc/hosts
+      - ./var_cppdev/vscode-server_vol:/root/.vscode-server
+      - cgroup_cppdev:/sys/fs/cgroup
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    privileged: true
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+
+
+    command: /bin/bash -c "while sleep 1000; do :; done"
+
+    networks:
+      - lan_dev
+
+networks:
+  lan_dev:
+
+volumes:
+  cppdev_vol:
+  cgroup_cppdev:

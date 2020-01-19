@@ -17,4 +17,4 @@ dir=$(dirname "$(readlink -f "$0")")
 #mkdir -p $dir/var_pgadmin4/pgadmin4_conf
 #sudo chown -R 5050:5050 $dir/var_pgadmin4
 
-docker-compose --project-name dev -f docker-compose.yml -f docker-compose-nodejs.yml -f docker-compose-python.yml up --build
+docker-compose --project-name dev -f docker-compose.yml -f docker-compose-nodejs.yml -f docker-compose-python.yml -f docker-compose-cpp.yml  up --build

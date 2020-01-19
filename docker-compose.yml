@@ -1,19 +1,28 @@
 version: '3'
 
-#services:
 
-#  db:
-#    image: postgres:12
-#    volumes:
-#      - pg_platforma_vol:/var/lib/postgresql/data
-#    environment:
-#      - POSTGRES_USER=postgres
-#    restart: unless-stopped
+services:
+  db:
+     image: postgres:12
+     volumes:
+       - pg_platforma_vol:/var/lib/postgresql/data
+     environment:
+       - POSTGRES_USER=postgres
+     restart: unless-stopped
 
-#    networks:
-#      - lan_dev
+     networks:
+      - lan_dev
 
 networks:
   lan_dev:
-  
+
+volumes:
+  pg_platforma_vol:
+
+
+
+
+
+
+
 
