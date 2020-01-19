@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+
+  nodejsdev:
+    hostname: nodejsdev
+    build:
+      context: ./cont_nodejsdev
+      dockerfile: Dockerfile
+    networks:
+      - lan_dev
+    volumes:
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.pgpass:/root/.pgpass
+      - nodesdev_vol:/workspace
+      - $SSH_AUTH_SOCK:/ssh-agent
+      - /etc/hosts:/etc/hosts
+      - ./var_nodejsdev/vscode-server_vol:/root/.vscode-server
+      - cgroup_nodejsdev:/sys/fs/cgroup
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    privileged: true
+    command: /bin/bash -c "while sleep 1000; do :; done"
+
+#  db:
+#    image: postgres:12
+#    volumes:
+#      - pg_platforma_vol:/var/lib/postgresql/data
+#    environment:
+#      - POSTGRES_USER=postgres
+#    restart: unless-stopped
+
+    networks:
+      - lan_dev
+
+networks:
+  lan_dev:
+
+volumes:
+  nodesdev_vol:
+  cgroup_nodejsdev:
